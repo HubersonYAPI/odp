@@ -123,7 +123,7 @@ include("../layout/main-footer.php");
       data: datatopost,
       success: function(data) {
         if (data == "success") {
-          window.location = "http://localhost/gpi/page/odp.php";
+          window.location = "http://localhost/odp/page/odp.php";
         } else {
           $("#signupmessage").html(data);
         }
