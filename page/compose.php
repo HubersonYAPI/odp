@@ -31,7 +31,7 @@
                 <li class="nav-item active">
                   <a href="mailbox.php" class="nav-link">
                     <i class="fas fa-inbox"></i> Réçues
-                    <span class="badge bg-primary float-right">15</span>
+                    <!-- <span class="badge bg-primary float-right">15</span> -->
                   </a>
                 </li>
                 <li class="nav-item">
@@ -42,13 +42,13 @@
                 <li class="nav-item">
                   <a href="mailbox-sent.php" class="nav-link">
                     <i class="far fa-envelope"></i> En cours
-                    <span class="badge bg-warning float-right">03</span>
+                    <!-- <span class="badge bg-warning float-right">03</span> -->
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="mailbox-solve.php" class="nav-link">
                     <i class="fas fa-filter"></i> Résolues
-                    <span class="badge bg-success float-right">10</span>
+                    <!-- <span class="badge bg-success float-right">10</span> -->
                   </a>
                 </li>
               </ul>
