@@ -6,8 +6,8 @@ include("../layout/top-nav.php");
 // Get the user_id
 $user_id = $_SESSION["user_id"];
 
-$sql = 'SELECT * FROM intervention, users WHERE intervention.user_id = users.user_id AND statut = "Recues" ORDER BY inter_id DESC';
-$interventions = mysqli_query($link, $sql);
+$sql = 'SELECT * FROM plaintes, commercants WHERE commercants.com_id = plaintes.commercants_com_id AND plainte_status = "recue" ORDER BY plainte_id DESC';
+$plaintes = mysqli_query($link, $sql);
 ?>
 
 
@@ -16,7 +16,7 @@ $interventions = mysqli_query($link, $sql);
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
-      <h2 class="text-center display-4">Demandes En Attente</h2>
+      <h2 class="text-center display-4">Plaintes en Attente</h2>
     </div>
   </section>
 
@@ -31,7 +31,7 @@ $interventions = mysqli_query($link, $sql);
         <div class="col-md-9">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title">Demandes En Attente</h3>
+              <h3 class="card-title">Plaintes en Attente</h3>
 
               <div class="card-tools">
                 <div class="input-group input-group-sm">
@@ -84,18 +84,18 @@ $interventions = mysqli_query($link, $sql);
                 <table class="table table-hover table-striped">
 
                   <tbody>
-                    <?php foreach ($interventions as $intervention) : ?>
+                    <?php foreach ($plaintes as $plainte) : ?>
 
-                      <tr class="view_inter" name="view_inter" id="<?= $intervention["inter_id"]; ?>" style="cursor: pointer;" data-target="#modal-lg" data-toggle="modal">
+                      <tr class="view_inter" name="view_inter" id="<?= $plainte["plainte_id"]; ?>" style="cursor: pointer;" data-target="#modal-lg" data-toggle="modal">
                         <td>
                           <div class="icheck-primary">
-                            <input type="checkbox" value="" id="check<?= $intervention['inter_id']; ?>">
-                            <label for="check<?= $intervention['inter_id']; ?>"></label>
+                            <input type="checkbox" value="" id="check<?= $plainte['plainte_id']; ?>">
+                            <label for="check<?= $plainte['plainte_id']; ?>"></label>
                           </div>
                         </td>
                         <!-- <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td> -->
-                        <td class="mailbox-name"><a href="#"><?= $intervention['username'] ?></a></td>
-                        <td class="mailbox-subject"><b><?= $intervention['panne'] ?></b> - <?= $intervention['description'] ?>...
+                        <td class="mailbox-name"><a href="#"><?= $plainte['com_nom'] ?></a></td>
+                        <td class="mailbox-subject"><b><?= $plainte['plainte_motif'] ?></b> - <?= $plainte['plainte_des'] ?>...
                         </td>
                         <td class="mailbox-attachment"></td>
                         <td class="mailbox-date">5 mins ago</td>
@@ -172,7 +172,7 @@ $interventions = mysqli_query($link, $sql);
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Détails de la demande </h4>
+            <h4 class="modal-title">Détails de la plainte </h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -181,19 +181,27 @@ $interventions = mysqli_query($link, $sql);
           <form id="waitform" method="post">
             <div class="modal-body">
 
-              <div id="errorwaitmessage"></div>
+              <div id="errorreadmessage"></div>
 
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Agent :</label>
+                    <label>Commerçant :</label>
                     <input type="text" class="form-control" name="view_user" id="view_user" disabled>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Type de panne :</label>
-                    <input type="text" class="form-control" name="view_panne" id="view_panne" disabled>
+                    <label>Statut :</label>
+                    <input type="text" class="form-control" name="view_status" id="view_status" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Motif :</label>
+                    <input type="text" class="form-control" name="view_motif" id="view_motif" disabled>
                   </div>
                 </div>
               </div>
@@ -209,29 +217,26 @@ $interventions = mysqli_query($link, $sql);
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Informaticien :</label>
-                    <select class="form-control" name="info_name" id="info_name">
-
+                    <label>Agent Traitant :</label>
+                    <select class="form-control" name="ag_id" id="ag_id">
                       <?php
-                      $sql = "SELECT * FROM users WHERE role='admin' ORDER BY username ASC";
+                      $sql = "SELECT * FROM agents WHERE ag_role='admin' ORDER BY ag_nom ASC";
                       $result = mysqli_query($link, $sql);
                       ?>
 
                       <?php while ($row = mysqli_fetch_array($result)) :; ?>
-                        <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+                        <option value="<?php echo $row[0]; ?>"><?php echo $row[1]." ".$row[2]; ?></option>
                       <?php endwhile; ?>
                     </select>
                   </div>
                 </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label>Priorité :</label>
-                    <select class="form-control" name="priorite" id="priorite">
-                      <option>Elevé</option>
-                      <option>Moyen</option>
-                      <option>Faible</option>
-                    </select>
-                  </div>
+                
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <label>Rapport :</label>
+                  <textarea class="form-control" rows="4" name="view_rapport" id="view_rapport" placeholder="" disabled></textarea>
                 </div>
               </div>
 

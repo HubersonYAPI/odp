@@ -7,42 +7,72 @@ $errors = "";
 
 // check user inputs
 // Define errpr messages
-$invalidEmail = '<p><strong>Please enter a valid email address!</strong></p>';
+$invalidEmail = '<p><strong>Adresse mail invalide</strong></p>';
 
-// Get username
-if(isset($_POST["cont_name"])){
-    $cont_name = filter_var($_POST["cont_name"], FILTER_SANITIZE_STRING);
+// Get last name
+if(isset($_POST["ag_nom"])){
+    $ag_nom = filter_var($_POST["ag_nom"], FILTER_SANITIZE_STRING);
     
 }
 
-$cont_img = filter_var($_POST["cont_img"], FILTER_SANITIZE_STRING);
-
+// Get first name
+if(isset($_POST["ag_prenoms"])){
+    $ag_prenoms = filter_var($_POST["ag_prenoms"], FILTER_SANITIZE_STRING);
+    
+}
 
 // Get phone
-if(isset($_POST["cont_phone"])){
-    $cont_phone = filter_var($_POST["cont_phone"], FILTER_SANITIZE_STRING);
+if(isset($_POST["ag_cel1"])){
+    $ag_cel1 = filter_var($_POST["ag_cel1"], FILTER_SANITIZE_STRING);
     
 }
 
 // Get phone2
-if(isset($_POST["cont_phone2"])){
-    $cont_phone2 = filter_var($_POST["cont_phone2"], FILTER_SANITIZE_STRING);
+if(isset($_POST["ag_cel2"])){
+    $ag_cel2 = filter_var($_POST["ag_cel2"], FILTER_SANITIZE_STRING);
     
 }
 
 
 // Get Adresse
-if(isset($_POST["cont_addr"])){
-    $cont_addr = filter_var($_POST["cont_addr"], FILTER_SANITIZE_STRING);
+if(isset($_POST["ag_addr"])){
+    $ag_addr = filter_var($_POST["ag_addr"], FILTER_SANITIZE_STRING);
     
 }
 
+// Get Service
+if(isset($_POST["ag_service"])){
+    $ag_service = filter_var($_POST["ag_service"], FILTER_SANITIZE_STRING);
+    
+}
+
+// Get Post
+if(isset($_POST["ag_poste"])){
+    $ag_poste = filter_var($_POST["ag_poste"], FILTER_SANITIZE_STRING);
+    
+}
+
+// Get login
+if(isset($_POST["ag_login"])){
+    $ag_login = filter_var($_POST["ag_login"], FILTER_SANITIZE_STRING);
+    
+}
+
+// Get Password
+if(isset($_POST["ag_mdp"])){
+    $ag_mdp = filter_var($_POST["ag_mdp"], FILTER_SANITIZE_STRING);
+    
+}
 
 //Get email
-$cont_mail = filter_var($_POST["cont_mail"], FILTER_SANITIZE_EMAIL);
-if(!filter_var($cont_mail, FILTER_VALIDATE_EMAIL)){
+$ag_mail = filter_var($_POST["ag_mail"], FILTER_SANITIZE_EMAIL);
+if(!filter_var($ag_mail, FILTER_VALIDATE_EMAIL)){
     $errors .= $invalidEmail;
 }
+
+$ag_role = "user";
+   
+
 
 // if there are any errors print error
 if($errors){
@@ -51,32 +81,22 @@ if($errors){
 }else {
         // no errors
         // prepare variables for queries
-    $cont_name = mysqli_real_escape_string($link, $cont_name);
-    $cont_phone = mysqli_real_escape_string($link, $cont_phone);
-    $cont_phone2 = mysqli_real_escape_string($link, $cont_phone2);
-    $cont_mail = mysqli_real_escape_string($link, $cont_mail);
-    $cont_addr = mysqli_real_escape_string($link, $cont_addr);
-    $cont_img = mysqli_real_escape_string($link, $cont_img);
+    $ag_nom = mysqli_real_escape_string($link, $ag_nom);
+    $ag_prenoms = mysqli_real_escape_string($link, $ag_prenoms);
+    $ag_cel1 = mysqli_real_escape_string($link, $ag_cel1);
+    $ag_cel2 = mysqli_real_escape_string($link, $ag_cel2);
+    $ag_mail = mysqli_real_escape_string($link, $ag_mail);
+    $ag_addr = mysqli_real_escape_string($link, $ag_addr);
+    $ag_service = mysqli_real_escape_string($link, $ag_service);
+    $ag_poste = mysqli_real_escape_string($link, $ag_poste);
+    $ag_login = mysqli_real_escape_string($link, $ag_login);
+    $ag_mdp = mysqli_real_escape_string($link, $ag_mdp);
+    $ag_mdp = md5($ag_mdp); //128 bits - 32 characters
+    $ag_role = mysqli_real_escape_string($link, $ag_role);
 
-
-
-    // if username exists in the users table print error
-    $sql = "SELECT * FROM controller WHERE cont_name = '$cont_name'";
-    $result = mysqli_query($link, $sql);
-    if (!$result) {
-        echo '<div class="alert alert-danger">Error running the query!</div>';
-        // echo '<div class="alert alert-danger">'.mysqli_error($link).'</div>';
-        exit;
-    }
-
-    $results = mysqli_num_rows($result);
-    if($results){
-        echo '<div class="alert alert-danger">That username is already registered. Do you want to log in?</div>';
-        exit;
-    }
-
-    // if email exists in the users table print error
-    $sql = "SELECT * FROM controller WHERE cont_phone = '$cont_phone' OR cont_phone2 = '$cont_phone' ";
+     
+    // if the phone number exists in the users table print error
+    $sql = "SELECT * FROM agents WHERE ag_cel1 = '$ag_cel1'";
     $result = mysqli_query($link, $sql);
     if (!$result) {
         echo '<div class="alert alert-danger">Error running the query!</div>';
@@ -84,19 +104,20 @@ if($errors){
     }
     $results = mysqli_num_rows($result);
     if($results){
-        echo '<div class="alert alert-danger">That Phone number is already registered. Use another one</div>';
+        echo '<div class="alert alert-danger">Ce Numéro est déjà utiliser par une autre personne</div>';
         exit;
     }
 
 
     // insert user details and activation code in the users table
-    $sql = "INSERT INTO controller (cont_name, cont_img, cont_phone, cont_phone2, cont_mail, cont_addr)
-            VALUES ('$cont_name', '$cont_img', '$cont_phone', '$cont_phone2', '$cont_mail', '$cont_addr' )";
+    $sql = "INSERT INTO agents (ag_nom, ag_prenoms, ag_cel1, ag_cel2, ag_mail, ag_addr, ag_login, ag_mdp, ag_service, ag_poste, ag_role)
+            VALUES ('$ag_nom', '$ag_prenoms', '$ag_cel1', '$ag_cel2', '$ag_mail', '$ag_addr', '$ag_login', '$ag_mdp', '$ag_service', '$ag_poste', '$ag_role' )";
     $result = mysqli_query($link, $sql);
     if (!$result) {
         echo '<div class="alert alert-danger">There was an error inserting the users details in the database</div>';
     }else {
         echo "success";
+        // var_dump($result);
     }
 
 

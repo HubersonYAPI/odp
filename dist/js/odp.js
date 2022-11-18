@@ -21,7 +21,7 @@ $("#odpform").submit(function(event) {
     event.preventDefault();
     // collect user inputs  
     var datatopost = $(this).serializeArray();
-    // console.log(datatopost);
+    console.log(datatopost);
     // send them to signup.php using AJAX
     $.ajax({
         url: "./../page/add-odp.php",
@@ -29,7 +29,6 @@ $("#odpform").submit(function(event) {
         data: datatopost,
         success: function(data) {
             if (data == "success") {
-                // console.log(data);
                 // $("#errormessage").html("<div class='alert alert-success'>Added.</div>");
                 window.location = "./../page/odp.php";
             } else {
@@ -61,20 +60,13 @@ $(document).ready(function() {
             dataType: "json",
             success: function(data) {
                 console.log(data);
-                $('#edit_annee').val(data.annee);
-                $('#edit_reference').val(data.reference);
-                $('#edit_total').val(data.total);
-                $('#edit_indic').val(data.indic);
-                $('#edit_reste').val(data.reste);
-                $('#edit_jour').val(data.jour);
-                $('#edit_longu').val(data.longu);
-                $('#edit_larg').val(data.larg);
-                $('#edit_sup').val(data.sup);
-                $('#edit_secteur').val(data.secteur);
-                $('#edit_localisation').val(data.localisation);
-                $('#edit_cont_name').val(data.cont_name);
-                $('#edit_trader_id').val(data.trader_name);
-                $('#edit_obs').val(data.obs);
+                $('#edit_odp_ref').val(data.odp_ref);
+                $('#edit_odp_long').val(data.odp_long);
+                $('#edit_odp_larg').val(data.odp_larg);
+                $('#edit_odp_sup').val(data.odp_sup);
+                $('#edit_odp_quartier').val(data.odp_quartier);
+                $('#edit_odp_localisation').val(data.odp_localisation);
+                $('#edit_odp_obs').val(data.odp_obs);
                 $('#employee_id').val(data.odp_id);
                 $('#update-lg').modal('show');
             },
@@ -116,6 +108,66 @@ $(document).ready(function() {
         });
 
     });
+ 
+    $("#odpversform").submit(function(event) {
+        // prevent default php procesing
+        event.preventDefault();
+        // collect user inputs  
+        var datatopost = $(this).serializeArray();
+        console.log(datatopost);
+        // send them to signup.php using AJAX
+        $.ajax({
+            url: "./../page/vers-odp.php",
+            type: "POST",
+            data: datatopost,
+            success: function(data) {
+                if (data == "success") {
+                    // $("#errormessage").html("<div class='alert alert-success'>Added.</div>");
+                    window.location = "./../page/odp.php";
+                    // console.log("data");
+                } else {
+                    $("#errormessage").html(data);
+                    console.log(data);
+    
+                }
+            },
+            error: function() {
+                $("#errormessage").html("<div class='alert alert-danger'>Error with Ajax Call. Please try again later.</div>");
+            }
+    
+        });
+    
+    });
+
+    $("#odpversform1").submit(function(event) {
+        // prevent default php procesing
+        event.preventDefault();
+        // collect user inputs  
+        var datatopost = $(this).serializeArray();
+        console.log(datatopost);
+        // send them to signup.php using AJAX
+        $.ajax({
+            url: "./../page/vers-odp1.php",
+            type: "POST",
+            data: datatopost,
+            success: function(data) {
+                if (data == "success") {
+                    // $("#errormessage").html("<div class='alert alert-success'>Added.</div>");
+                    // window.location = "./../page/odp.php";
+                    console.log("data");
+                } else {
+                    $("#errormessage").html(data);
+                    console.log(data);
+    
+                }
+            },
+            error: function() {
+                $("#errormessage").html("<div class='alert alert-danger'>Error with Ajax Call. Please try again later.</div>");
+            }
+    
+        });
+    
+    });
 
     $(document).on('click', '.view_odp', function() {
 
@@ -128,29 +180,62 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function(data) {
-                // console.log(data);
-                $('#view_annee').val(data.annee);
-                $('#view_reference').val(data.reference);
-                $('#view_total').val(data.total);
-                $('#view_indic').val(data.indic);
-                $('#view_reste').val(data.reste);
-                $('#view_jour').val(data.jour);
-                $('#view_longu').val(data.longu);
-                $('#view_larg').val(data.larg);
-                $('#view_sup').val(data.sup);
-                $('#view_secteur').val(data.secteur);
-                $('#view_localisation').val(data.localisation);
-                $('#view_obs').val(data.obs);
-                $('#view_trader_name').val(data.trader_name);
-                $('#view_trader_company').val(data.trader_company);
-                $('#view_trader_phone').val(data.trader_phone);
-                $('#view_trader_phone2').val(data.trader_phone2);
-                $('#view_trader_mail').val(data.trader_mail);
-                $('#view_trader_addr').val(data.trader_addr);
-                $('#view_cont_name').val(data.cont_name);
-                $('#view_cont_phone').val(data.cont_phone);
+                console.log(data);
+                $('#view_odp_ref').val(data.odp_ref);
+                $('#view_odp_long').val(data.odp_long);
+                $('#view_odp_larg').val(data.odp_larg);
+                $('#view_odp_sup').val(data.odp_sup);
+                $('#view_odp_quartier').val(data.odp_quartier);
+                $('#view_odp_localisation').val(data.odp_localisation);
+                $('#view_odp_obs').val(data.odp_obs);
+                $('#view_trader_name').val(data.com_nom + " " + data.com_prenoms);
+                $('#view_trader_company').val(data.com_ent);
+                $('#view_trader_phone').val(data.com_cel1);
+                $('#view_trader_phone2').val(data.com_cel2);
+                $('#view_trader_mail').val(data.com_mail);
+                $('#view_trader_addr').val(data.com_addr);
+                $('#view_cont_name').val(data.ag_nom);
+                $('#view_cont_phone').val(data.ag_cel1);
                 $('#employee_id').val(data.odp_id);
                 $('#info-xl').modal('show');
+
+            },
+            error: function() {
+
+            }
+        });
+
+    });
+
+    $(document).on('click', '.vers_odp', function() {
+
+        var employee_id = $(this).attr("id");
+        // console.log(employee_id);
+        
+        $.ajax({
+            url: "./../page/view-vers-odp.php",
+            method: "POST",
+            data: {
+                employee_id: employee_id
+            },
+            dataType: "json",
+            success: function(data) {
+                console.log(data);
+                // console.log($vers_date);
+                $('#reg_reste').val(data.reg_reste);
+                $('#reg_avance').val(data.reg_avance);
+                $('#reg_prix').val(data.reg_prix);
+                $('#reg_odp_ref').val(data.odp_ref);
+                $('#reg_odp_quartier').val(data.odp_quartier);
+                $('#reg_odp_sup').val(data.odp_sup);
+                $('#reg_trader_name').val(data.com_nom + " " + data.com_prenoms);
+                $('#reg_trader_phone').val(data.com_cel1);
+                $('#vers_reglements_id').val(data.reg_id);
+                $('#vers_odp_id').val(data.odp_id);
+                $('#vers_commercants_id').val(data.com_id);
+                $('#vers_agents_id').val(data.ag_id);
+                $('#employee_id').val(data.odp_id);
+                $('#vers-lg').modal('show');
 
             },
             error: function() {

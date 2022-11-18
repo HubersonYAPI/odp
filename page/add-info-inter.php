@@ -6,14 +6,12 @@ $user_id = $_SESSION["user_id"];
 
 // var_dump($_POST["employee_id"]);
  
-$info_id = filter_var($_POST["info_name"], FILTER_SANITIZE_STRING);
-$priorite = filter_var($_POST["priorite"], FILTER_SANITIZE_STRING);
+$ag_id = filter_var($_POST["ag_id"], FILTER_SANITIZE_STRING);
 
-$info_id = mysqli_real_escape_string($link, $info_id);
-$priorite = mysqli_real_escape_string($link, $priorite);
+$ag_id = mysqli_real_escape_string($link, $ag_id);
 
-$sql = "UPDATE intervention SET `info_id` = '$info_id', `priorite` = '$priorite', `statut` = 'En cours'
-WHERE  inter_id = '".$_POST["employee_id"]."'";
+$sql = "UPDATE plaintes SET `agents_ag_id` = '$ag_id', `plainte_status` = 'en cours'
+WHERE  plainte_id = '".$_POST["employee_id"]."'";
 $result = mysqli_query($link, $sql);
 if (!$result) {
     echo '<div class="alert alert-danger">Failled to apply. Please contact IT service</div>';

@@ -5,13 +5,14 @@ include('../log/connection.php');
 
 
 
-$sql = "DELETE  FROM trader WHERE trader_id = '".$_POST["employee_id"]."'";
+$sql = "DELETE  FROM commercants WHERE com_id = '".$_POST["employee_id"]."'";
     $result = mysqli_query($link, $sql);
     echo json_encode($result);
-//     if (!$result) {
-//         echo "error";
-//     }else {
-//         echo "success";
-//     }
-
+    // var_dump($result);
+    /* if (!$result) {
+        echo "error";
+    }else {
+        echo "success";
+    }
+ */
 ?>

@@ -7,7 +7,7 @@ include("../layout/top-nav.php");
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
-      <h2 class="text-center display-4">Demandes d'Interventions</h2>
+      <h2 class="text-center display-4">Gestion des Plaintes</h2>
     </div>
   </section>
 

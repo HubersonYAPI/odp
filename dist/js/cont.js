@@ -29,6 +29,8 @@ $("#contform").submit(function(event) {
         data: datatopost,
         success: function(data) {
             if (data == "success") {
+                // console.log(data);
+
                 window.location = "./../page/cont.php";
                 // $("#errormessage").html("<div class='alert alert-success'>Added.</div>");
             } else {
@@ -57,13 +59,15 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function(data) {
-                $('#edit_cont_name').val(data.cont_name);
-                $('#edit_cont_phone').val(data.cont_phone);
-                $('#edit_cont_phone2').val(data.cont_phone2);
-                $('#edit_cont_mail').val(data.cont_mail);
-                $('#edit_cont_addr').val(data.cont_addr);
-                $('#edit_cont_img').val(data.cont_img);
-                $('#employee_id').val(data.cont_id);
+                $('#edit_ag_nom').val(data.ag_nom);
+                $('#edit_ag_prenoms').val(data.ag_prenoms);
+                $('#edit_ag_cel1').val(data.ag_cel1);
+                $('#edit_ag_cel2').val(data.ag_cel2);
+                $('#edit_ag_mail').val(data.ag_mail);
+                $('#edit_ag_addr').val(data.ag_addr);
+                $('#edit_ag_service').val(data.ag_service);
+                $('#edit_ag_poste').val(data.ag_poste);
+                $('#employee_id').val(data.ag_id);
                 $('#update-lg').modal('show');
             },
             error: function() {
@@ -116,14 +120,16 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function(data) {
-                console.log(data);
-                $('#view_cont_name').val(data.cont_name);
-                $('#view_cont_phone').val(data.cont_phone);
-                $('#view_cont_phone2').val(data.cont_phone2);
-                $('#view_cont_mail').val(data.cont_mail);
-                $('#view_cont_addr').val(data.cont_addr);
-                $('#edit_cont_img').val(data.cont_img);
-                $('#employee_id').val(data.cont_id);
+                // console.log(data);
+                $('#view_ag_nom').val(data.ag_nom + " " + data.ag_prenoms);
+                $('#view_ag_service').val(data.ag_service);
+                $('#view_ag_poste').val(data.ag_poste);
+                $('#view_ag_cel1').val(data.ag_cel1);
+                $('#view_ag_cel2').val(data.ag_cel2);
+                $('#view_ag_mail').val(data.ag_mail);
+                $('#view_ag_addr').val(data.ag_addr);
+                $('#employee_id').val(data.ag_id);
+                $('#employee_ag_id').val(data.ag_id);
                 $('#info-xl').modal('show');
 
             },

@@ -21,7 +21,7 @@ $("#traderform").submit(function(event) {
     event.preventDefault();
     // collect user inputs  
     var datatopost = $(this).serializeArray();
-    console.log(datatopost);
+    // console.log(datatopost);
     // send them to signup.php using AJAX
     $.ajax({
         url: "./../page/add-trader.php",
@@ -29,6 +29,8 @@ $("#traderform").submit(function(event) {
         data: datatopost,
         success: function(data) {
             if (data == "success") {
+            // console.log(data);
+
                 window.location = "./../page/trader.php";
                 // $("#errormessage").html("<div class='alert alert-success'>Added.</div>");
             } else {
@@ -57,13 +59,14 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function(data) {
-                $('#edit_trader_name').val(data.trader_name);
-                $('#edit_trader_company').val(data.trader_company);
-                $('#edit_trader_phone').val(data.trader_phone);
-                $('#edit_trader_phone2').val(data.trader_phone2);
-                $('#edit_trader_mail').val(data.trader_mail);
-                $('#edit_trader_addr').val(data.trader_addr);
-                $('#employee_id').val(data.trader_id);
+                $('#edit_trader_name').val(data.com_nom);
+                $('#edit_trader_fname').val(data.com_prenoms);
+                $('#edit_trader_company').val(data.com_ent);
+                $('#edit_trader_phone').val(data.com_cel1);
+                $('#edit_trader_phone2').val(data.com_cel2);
+                $('#edit_trader_mail').val(data.com_mail);
+                $('#edit_trader_addr').val(data.com_addr);
+                $('#employee_id').val(data.com_id);
                 $('#update-lg').modal('show');
             },
             error: function() {
@@ -116,14 +119,14 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function(data) {
-                console.log(data);
-                $('#view_trader_name').val(data.trader_name);
-                $('#view_trader_company').val(data.trader_company);
-                $('#view_trader_phone').val(data.trader_phone);
-                $('#view_trader_phone2').val(data.trader_phone2);
-                $('#view_trader_mail').val(data.trader_mail);
-                $('#view_trader_addr').val(data.trader_addr);
-                $('#employee_id').val(data.trader_id);
+                // console.log(data);
+                $('#view_trader_name').val(data.com_nom);
+                $('#view_trader_company').val(data.com_ent);
+                $('#view_trader_phone').val(data.com_cel1);
+                $('#view_trader_phone2').val(data.com_cel2);
+                $('#view_trader_mail').val(data.com_mail);
+                $('#view_trader_addr').val(data.com_addr);
+                $('#employee_id').val(data.com_id);
                 $('#info-xl').modal('show');
 
             },
@@ -138,8 +141,8 @@ $(document).ready(function() {
 
         var employee_id = $(this).attr("id");
         var datatopost = $(this).serializeArray();
-        console.log(employee_id);
-        console.log(datatopost);
+        console.log("emp "+employee_id);
+        console.log("post "+datatopost);
         $.ajax({
             url: "./../page/del-trader.php",
             type: "POST",
@@ -148,7 +151,8 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function(data) {
-                window.location = "./../page/trader.php";
+                console.log("data "+data);
+                // window.location = "./../page/trader.php";
 
             },
             error: function() {}

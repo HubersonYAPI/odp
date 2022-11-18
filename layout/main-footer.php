@@ -1,6 +1,6 @@
 <!-- /.content-wrapper -->
 <footer class="main-footer text-center">
-    <strong>Copyright &copy; 2019-2021 <a href="#">Mairie Agboville </a>.</strong> Tous droits reservés.
+    <strong>Copyright &copy; 2019-2022 <a href="#">Mairie Agboville </a>.</strong> Tous droits reservés.
 </footer>
 
 </div>

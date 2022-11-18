@@ -2,9 +2,9 @@
 
 <?php
 // Get the user_id
-$user_id = $_SESSION["user_id"];
+$ag_id = $_SESSION["ag_id"];
 // run a query to delete empty trader
-$sql = 'SELECT * FROM trader ORDER BY trader_id DESC';
+$sql = 'SELECT * FROM commercants ORDER BY com_id DESC';
 $traders = mysqli_query($link, $sql);
 // $traders = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
@@ -77,20 +77,20 @@ $traders = mysqli_query($link, $sql);
                                     ?>
 
                                         <tr>
-                                            <td><?= $trader['trader_name'] ?></td>
-                                            <td><?= $trader['trader_company'] ?></td>
-                                            <td><?= $trader['trader_phone'] ?></td>
-                                            <td><?= $trader['trader_mail'] ?></td>
-                                            <td><?= $trader['trader_addr'] ?></td>
+                                            <td><?= $trader['com_nom']." ".$trader['com_prenoms'] ?></td>
+                                            <td><?= $trader['com_ent'] ?></td>
+                                            <td><?= $trader['com_cel1'] ?></td>
+                                            <td><?= $trader['com_mail'] ?></td>
+                                            <td><?= $trader['com_addr'] ?></td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-default view_trader" name="view_trader" id="<?= $trader["trader_id"]; ?>">
+                                                    <button type="button" class="btn btn-default view_trader" name="view_trader" id="<?= $trader["com_id"]; ?>">
                                                         <i class="fas fa-eye fa-align-left" data-target="#info-xl" data-toggle="modal"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-default edit_trader" name="edit_trader" id="<?= $trader["trader_id"]; ?>">
+                                                    <button type="button" class="btn btn-default edit_trader" name="edit_trader" id="<?= $trader["com_id"]; ?>">
                                                         <i class="fas fa-edit fa-align-left" data-target="#update-lg" data-toggle="modal"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-default del_trader" name="del_trader" id="<?= $trader["trader_id"]; ?>">
+                                                    <button type="button" class="btn btn-default del_trader" name="del_trader" id="<?= $trader["com_id"]; ?>">
                                                         <i class="fas fa-trash fa-align-center"></i>
                                                     </button>
                                                 </div>
@@ -123,10 +123,10 @@ $traders = mysqli_query($link, $sql);
 
         <!-- add modal -->
         <div class="modal fade" id="modal-lg">
-            <div class="modal-dialog modal-default">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Ajouter Commerçant</h4>
+                        <h4 class="modal-title">Informations Générales du Commerçant</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -137,59 +137,90 @@ $traders = mysqli_query($link, $sql);
 
                             <div id="errormessage"></div>
 
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="trader_name" id="trader_name" placeholder="Nom & Prénoms" autocomplete="off" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-user"></span>
+                            <div class="row mt-3">
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="com_nom" id="com_nom" placeholder="Nom" autocomplete="off" required>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="trader_company" id="trader_company" placeholder="Raison Social" autocomplete="off" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-user"></span>
-                                    </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="com_prenoms" id="com_prenoms" placeholder="Prénoms" autocomplete="off" required>
+                                    </div>                                 
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="com_ent" id="com_ent" placeholder="Compagnie" autocomplete="off">
+                                    </div>                                 
                                 </div>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="trader_phone" id="trader_phone" placeholder="Contact 1" autocomplete="off" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-phone"></span>
+
+                            <div class="row mt-3">
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="com_cel1" id="com_cel1" placeholder="Contact 1" autocomplete="off" required>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="trader_phone2" id="trader_phone2" placeholder="Contact 2" autocomplete="off" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-phone"></span>
-                                    </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="com_cel2" id="com_cel2" placeholder="Contact 2" autocomplete="off">
+                                    </div>                            
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="email" class="form-control" name="com_mail" id="com_mail" placeholder="Email" autocomplete="off">
+                                    </div>                            
                                 </div>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="email" class="form-control" name="trader_mail" id="trader_mail" placeholder="Email" autocomplete="off" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-envelope"></span>
-                                    </div>
+
+                            <div class="row mt-3">                                
+                                <div class="col-sm-12">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="com_addr" id="com_addr" placeholder="Quartier" autocomplete="off" required>
+                                    </div>                                
                                 </div>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="trader_addr" id="trader_addr" placeholder="Adresse" autocomplete="off" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-map-marker-alt"></span>
+
+                            <hr>
+                            <h4 class="modal-title">Informations de Connexion</h4>
+                            
+                            <div class="row mt-3">
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="com_login" id="com_login" placeholder="Login" autocomplete="off" required>
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-user"></span>
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="password" class="form-control" name="com_mdp" id="com_mdp" placeholder="Mot de passe" autocomplete="off" required>
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-lock"></span>
+                                            </div>
+                                        </div>
+                                    </div>                                
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="password" class="form-control" name="com_mdp1" id="com_mdp1" placeholder="Confirmer Mot de passe" autocomplete="off" required>
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-lock"></span>
+                                            </div>
+                                        </div>
+                                    </div>                                
                                 </div>
                             </div>
 
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" name="add_trader" id="add_trader">Save changes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary" name="add_trader" id="add_trader">Enregistrer</button>
                         </div>
                     </form>
                 </div>
@@ -316,7 +347,7 @@ $traders = mysqli_query($link, $sql);
         <!-- /. update modal -->
         <!-- update modal -->
         <div class="modal fade" id="update-lg">
-            <div class="modal-dialog modal-default">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Mettre à jour les informations</h4>
@@ -331,60 +362,55 @@ $traders = mysqli_query($link, $sql);
                             <div id="errorupmessage"></div>
                             <input type="hidden" name="update_id" id="update_id">
 
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="edit_trader_name" id="edit_trader_name" placeholder="Nom & Prénoms" autocomplete="off" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-user"></span>
+                            <div class="row mt-3">
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="edit_trader_name" id="edit_trader_name" placeholder="Nom" autocomplete="off" required>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="edit_trader_company" id="edit_trader_company" placeholder="Raison Social" autocomplete="off" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-user"></span>
-                                    </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="edit_trader_fname" id="edit_trader_fname" placeholder="Prénoms" autocomplete="off" required>
+                                    </div>                                 
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="edit_trader_company" id="edit_trader_company" placeholder="Compagnie" autocomplete="off">
+                                    </div>                                 
                                 </div>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="edit_trader_phone" id="edit_trader_phone" placeholder="Contact 1" autocomplete="off" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-phone"></span>
+
+                            <div class="row mt-3">
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="edit_trader_phone" id="edit_trader_phone" placeholder="Contact 1" autocomplete="off" required>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="edit_trader_phone2" id="edit_trader_phone2" placeholder="Contact 2" autocomplete="off" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-phone"></span>
-                                    </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="edit_trader_phone2" id="edit_trader_phone2" placeholder="Contact 2" autocomplete="off">
+                                    </div>                            
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group mb-3">
+                                        <input type="email" class="form-control" name="edit_trader_mail" id="edit_trader_mail" placeholder="Email" autocomplete="off">
+                                    </div>                            
                                 </div>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="email" class="form-control" name="edit_trader_mail" id="edit_trader_mail" placeholder="Email" autocomplete="off" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-envelope"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="edit_trader_addr" id="edit_trader_addr" placeholder="Adresse" autocomplete="off" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-map-marker-alt"></span>
-                                    </div>
+
+                            <div class="row mt-3">                                
+                                <div class="col-sm-12">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="edit_trader_addr" id="edit_trader_addr" placeholder="Quartier" autocomplete="off" required>
+                                    </div>                                
                                 </div>
                             </div>
 
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                             <input type="hidden" name="employee_id" id="employee_id">
-                            <button type="submit" class="btn btn-primary" name="update_trader" id="update_trader">Save changes</button>
+                            <button type="submit" class="btn btn-primary" name="update_trader" id="update_trader">Modifier</button>
                         </div>
                     </form>
                 </div>

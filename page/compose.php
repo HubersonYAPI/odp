@@ -5,7 +5,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
-      <h2 class="text-center display-4">Demandes d'Interventions</h2>
+      <h2 class="text-center display-4">Gestion des Plaintes</h2>
     </div>
   </section>
 
@@ -18,7 +18,7 @@
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Demandes d'interventions</h3>
+              <h3 class="card-title">Gestion des Plaintes</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -62,7 +62,7 @@
         <div class="col-md-9">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title">Demander une intervention</h3>
+              <h3 class="card-title">Saisir une plainte</h3>
             </div>
             <!-- /.card-header -->
 
@@ -71,17 +71,12 @@
                 <div id="errormessage"></div>
 
                 <div class="form-group">
-                  <label>Type de panne :</label>
-                  <select class="form-control" name="panne" id="panne">
-                    <option value="Ordinateur">Ordinateur</option>
-                    <option value="Imprimante">Imprimante</option>
-                    <option value="Internet">Internet</option>
-                    <option value="Autres">Autres</option>
-                  </select>
+                  <label>Motif :</label>
+                  <input type="text" class="form-control" name="plainte_motif" id="plainte_motif">
                 </div>
                 <div class="form-group">
                   <label>Description :</label>
-                  <textarea class="form-control" rows="4" name="description" id="description" placeholder="Enter ..." required></textarea>
+                  <textarea class="form-control" rows="4" name="plainte_des" id="plainte_des" placeholder="Enter ..." required></textarea>
                 </div>
               </div>
               <!-- /.card-body -->

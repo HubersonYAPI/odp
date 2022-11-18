@@ -41,14 +41,15 @@ $(document).on('click', '.view_inter', function() {
         dataType: "json",
         success: function(data) {
             console.log(data);
-            $('#view_user').val(data.username);
-            $('#view_panne').val(data.panne);
-            $('#view_desc').val(data.description);
-            $('#view_priorite').val(data.priorite);
-            $('#info_id').val(data.info_id);
-            $('#view_diagnostic').val(data.diagnostic);
-            $('#view_solution').val(data.solution);
-            $('#employee_id').val(data.inter_id);
+            $('#view_user').val(data.com_nom);
+            $('#view_status').val(data.plainte_status);
+            $('#view_motif').val(data.plainte_motif);
+            $('#view_desc').val(data.plainte_des);
+            $('#ag_id').val(data.ag_id);
+            $('#ag_nom').val(data.ag_nom+" "+data.ag_prenoms);
+            $('#view_contact').val(data.ag_cel1);
+            $('#view_rapport').val(data.plainte_rapp);
+            $('#employee_id').val(data.plainte_id);
             $('#modal-lg').modal('show');
             
 
@@ -76,7 +77,7 @@ $("#waitform").submit(function (event) {
         success: function (data) {
             // console.log(data);
             if (data == "success") {
-                window.location = "./../page/waiting.php";
+                window.location = "./../page/mailbox-sent.php";
                 // $("#errorwaitmessage").html("<div class='alert alert-success'>Added.</div>");
             } else {
                 $("#errorwaitmessage").html(data);
@@ -106,7 +107,7 @@ $("#sentform").submit(function (event) {
         success: function (data) {
             // console.log(data);
             if (data == "success") {
-                window.location = "./../page/waiting.php";
+                window.location = "./../page/mailbox-solve.php";
                 // $("#errorwaitmessage").html("<div class='alert alert-success'>Added.</div>");
             } else {
                 $("#errorsentmessage").html(data);

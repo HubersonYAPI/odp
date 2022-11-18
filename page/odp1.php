@@ -25,11 +25,11 @@ $odps = mysqli_query($link, $sql);
             <div class="row mt-3">
                 <div class="col-md-10 offset-md-1">
                     <div class="buttons mb-2">
-                        <!-- <button id="addNote" type="button" class="btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#modal-lg">Ajouter ODP</button> -->
+                        <button id="addNote" type="button" class="btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#modal-lg">Ajouter ODP</button>
                         <!-- <button id="edit" type="button" class="btn btn-outline-primary btn-lg float-right">Edit</button>
                                 <button id="done" type="button" class="btn btn-outline-success btn-lg float-right mr-1">Done</button>
                                 <button id="allNotes" type="button" class="btn btn-outline-primary btn-lg">All Note</button> -->
-                        <a name="odp_add" id="odp_add" class="btn btn-outline-primary btn-lg" href="odp_add.php" role="button">Ajouter ODP</a>
+                        <!-- <a name="odp_add" id="odp_add" class="btn btn-outline-primary btn-lg" href="odp_add.php" role="button">Ajouter ODP</a> -->
                     </div>
 
                     <div class="card">
@@ -85,16 +85,14 @@ $odps = mysqli_query($link, $sql);
                                             <td><?= $odp['odp_obs'] ?></td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a name="" id="" class="btn btn-default" href="odp-detail.php?id=<?= $odp["odp_id"]; ?>" role="button"><i class="fas fa-eye fa-align-left"></i></a>
-
-                                                    <!-- <button type="button" class="btn btn-default view_odp" name="view_odp" id="<?= $odp["odp_id"]; ?>">
+                                                    <button type="button" class="btn btn-default view_odp" name="view_odp" id="<?= $odp["odp_id"]; ?>">
                                                         <i class="fas fa-eye fa-align-left" data-target="#info-xl" data-toggle="modal"></i>
-                                                    </button> -->
+                                                    </button>
                                                     <button type="button" class="btn btn-default edit_odp" name="edit_odp" id="<?= $odp["odp_id"]; ?>">
                                                         <i class="fas fa-edit fa-align-left" data-target="#update-lg" data-toggle="modal"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-default vers_odp" name="vers_odp" id="<?= $odp["odp_id"]; ?>">
-                                                        <i class="fas fa-coins fa-align-center" data-target="#vers-lg" data-toggle="modal"></i>
+                                                    <button type="button" class="btn btn-default del_odp" name="del_odp" id="<?= $odp["odp_id"]; ?>">
+                                                        <i class="fas fa-trash fa-align-center"></i>
                                                     </button>
                                                 </div>
                                             </td>
@@ -245,7 +243,7 @@ $odps = mysqli_query($link, $sql);
 
         <!-- info modal -->
         <div class="modal fade" id="info-xl">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Information sur ODP</h4>
@@ -256,34 +254,6 @@ $odps = mysqli_query($link, $sql);
                     <div class="modal-body">
 
                         <form>
-                            <div class="row mt-3">
-                                <div class="col-sm-3">
-                                    <div class="form-group mb-3">
-                                        <label>Statut :</label>
-                                        <input type="text" class="form-control" name="vers_ref" id="vers_ref" autocomplete="off" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group mb-3">
-                                        <label>Nombre de Jour :</label>
-                                        <input type="text" class="form-control" name="vers_nbre_jour" id="vers_nbre_jour" autocomplete="off" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group mb-3">
-                                        <label>Montant:</label>
-                                        <!-- <input type="text" class="form-control" name="vers_prix" id="vers_prix" autocomplete="off" disabled> -->
-                                    </div>
-                                </div>
-
-
-                                <div class="col-sm-3">
-                                    <div class="form-group mb-3">
-                                        <label>Reste à payer:</label>
-                                        <input type="text" class="form-control" name="reg_date_fin" id="reg_date_fin" disabled>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row mt-3">
                                 <div class="col-sm-3">
                                     <div class="form-group3">
@@ -414,128 +384,7 @@ $odps = mysqli_query($link, $sql);
             </div>
             <!-- /.modal-dialog -->
         </div>
-        <!-- /. info modal -->
-
-        <!-- versement modal -->
-        <div class="modal fade" id="vers-lg">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Proceder à un versement</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <form id="odpversform" method="post">
-                        <div class="modal-body">
-
-                            <div id="errorupmessage"></div>
-                            <input type="hidden" name="vers_err_id" id="vers_err_id">
-
-
-                            <div class="row mt-3">
-                                <div class="col-sm-3">
-                                    <div class="form-group mb-3">
-                                        <label>Référence :</label>
-                                        <input type="text" class="form-control" name="vers_ref" id="vers_ref" autocomplete="off" required>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <div class="form-group mb-3">
-                                        <label>Montant:</label>
-                                        <input type="text" class="form-control" name="vers_prix" id="vers_prix" autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group mb-3">
-                                        <label>Reste à payer:</label>
-                                        <input type="text" class="form-control" name="reg_reste" id="reg_reste" disabled>
-                                        <input type="hidden" class="form-control" name="reg_reste" id="reg_reste">
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group mb-3">
-                                        <label>Total :</label>
-                                        <input type="text" class="form-control" name="reg_prix" id="reg_prix" disabled>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- <input type="hidden" name="vers_date" id="vers_date" value="value=" <?= date('d/m/Y'); ?>"">
-                            <input type="hidden" name="vers_reglements_id" id="vers_reglements_id">
-                            <input type="hidden" name="vers_odp_id" id="vers_odp_id">
-                            <input type="hidden" name="vers_commercants_id" id="vers_commercants_id">
-                            <input type="hidden" name="vers_agents_id" id="vers_agents_id"> -->
-                            <hr>
-                            <div class="row">
-                                
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <input type="hidden" class="form-control" name="vers_date" id="vers_date" value="<?= date('d/m/Y'); ?>"">
-                                        <input type="hidden" class="form-control" name="reg_avance" id="reg_avance">
-                                        <input type="hidden" class="form-control" name="vers_agents_id" id="vers_agents_id">
-                                        <input type="hidden" class="form-control" name="vers_odp_id" id="vers_odp_id">
-                                        <input type="hidden" class="form-control" name="vers_commercants_id" id="vers_commercants_id">
-                                        <input type="hidden" class="form-control" name="vers_reglements_id" id="vers_reglements_id">
-                                    </div>
-                                </div>
-                                <!-- <input type="hidden"  name="vers_agents_id" id="vers_agents_id"> -->
-                            </div>
-                            <h4 class="modal-title">Information de l'ODP</h4>
-                            <div class="row mt-3">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Référence :</label>
-                                        <input type="text" class="form-control" name="reg_odp_ref" id="reg_odp_ref" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Quartier :</label>
-                                        <input type="text" class="form-control" name="reg_odp_quartier" id="reg_odp_quartier" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Superficie (M²)</label>
-                                        <input type="text" class="form-control" name="reg_odp_sup" id="reg_odp_sup" disabled>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <!-- textarea -->
-                                    <div class="form-group">
-                                        <label>Commerçant :</label>
-                                        <input type="text" class="form-control" name="reg_trader_name" id="reg_trader_name" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <!-- textarea -->
-                                    <div class="form-group">
-                                        <label>Contact : </label>
-                                        <input type="text" class="form-control" name="reg_trader_phone" id="reg_trader_phone" disabled>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                            <input type="hidden" name="employee_id" id="employee_id">
-                            <button type="submit" class="btn btn-primary" name="edit_odp" id="edit_odp">Enregistrer</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
         <!-- /. update modal -->
-
         <!-- update modal -->
         <div class="modal fade" id="update-lg">
             <div class="modal-dialog modal-lg">

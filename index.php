@@ -11,6 +11,8 @@ include('log/connection.php');
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mairie Agboville</title>
 
+  <link rel="icon" type="image/png" href="dist/img/AdminLTELogo.png">
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -44,10 +46,10 @@ include('log/connection.php');
           <div id="loginmessage"></div>
 
           <div class="input-group mb-3">
-            <input type="email" class="form-control" name="loginemail" id="loginemail" placeholder="Email" autocomplete="off">
+            <input type="text" class="form-control" name="loginemail" id="loginemail" placeholder="Identifiant" autocomplete="off">
             <div class="input-group-append">
               <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+                <span class="fas fa-user"></span>
               </div>
             </div>
           </div>
@@ -95,9 +97,11 @@ $("#loginform").submit(function (event) {
         data: datatopost,
         success: function (data) {
             if (data == "success"){
-                window.location = "page/odp.php";
+                window.location = "page/cont.php";
             }else{
                 $('#loginmessage').html(data);
+    // console.log('fail');
+
             }
         },
         error: function () {

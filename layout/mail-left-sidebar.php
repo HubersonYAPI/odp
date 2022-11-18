@@ -1,9 +1,9 @@
 <div class="col-md-3">
-    <a href="compose.php" class="btn btn-primary btn-block mb-3">Compose</a>
+    <a href="compose.php" class="btn btn-primary btn-block mb-3">Ecrire</a>
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Demandes d'interventions</h3>
+            <h3 class="card-title">Gestion des Plaintes</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -21,12 +21,12 @@
                 </li>
                 <li class="nav-item">
                   <a href="waiting.php" class="nav-link">
-                    <i class="far fa-file-alt"></i> En attente de confirmation
+                    <i class="far fa-file-alt"></i> En attente
                   </a>
                 </li>
                 <li class="nav-item">
                     <a href="mailbox-sent.php" class="nav-link">
-                        <i class="far fa-envelope"></i> En cours
+                        <i class="far fa-envelope"></i> Rapport
                         <span class="badge bg-warning float-right">03</span>
                     </a>
                 </li>

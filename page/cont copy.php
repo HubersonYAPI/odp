@@ -1,8 +1,8 @@
 <?php include("../layout/top-nav.php"); ?>
 
 <?php
-// Get the user_id
-$ag_id = $_SESSION["user_id"];
+// Get the agent id
+$ag_id = $_SESSION["ag_id"];
 
 $sql = 'SELECT * FROM agents';
 $conts = mysqli_query($link, $sql);
@@ -13,7 +13,7 @@ $conts = mysqli_query($link, $sql);
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
-            <h2 class="text-center display-4">Gestion des Agents</h2>
+            <h2 class="text-center display-4">Gestion des Agents de la Mairie</h2>
         </div>
     </section>
 
@@ -80,13 +80,13 @@ $conts = mysqli_query($link, $sql);
                                             <td><?= $cont['ag_poste'] ?></td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-default view_cont" name="view_cont" id="<?= $cont["ag_id"]; ?>">
+                                                    <button type="button" class="btn btn-default view_ag" name="view_ag" id="<?= $cont["ag_id"]; ?>">
                                                         <i class="fas fa-eye fa-align-left" data-target="#info-xl" data-toggle="modal"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-default edit_cont" name="edit_cont" id="<?= $cont["ag_id"]; ?>">
+                                                    <button type="button" class="btn btn-default edit_cont" name="edit_cont" id="<?= $cont["cont_id"]; ?>">
                                                         <i class="fas fa-edit fa-align-left" data-target="#update-lg" data-toggle="modal"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-default del_cont" name="del_cont" id="<?= $cont["ag_id"]; ?>">
+                                                    <button type="button" class="btn btn-default del_cont" name="del_cont" id="<?= $cont["cont_id"]; ?>">
                                                         <i class="fas fa-trash fa-align-center"></i>
                                                     </button>
                                                 </div>
@@ -146,7 +146,7 @@ $conts = mysqli_query($link, $sql);
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="ag_prenoms" id="ag_prenoms" placeholder="Prénoms" autocomplete="off" required>
+                                        <input type="text" class="form-control" name="ag_prenoms" id="cont_name" placeholder="Prénoms" autocomplete="off" required>
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <span class="fas fa-user"></span>
@@ -159,7 +159,7 @@ $conts = mysqli_query($link, $sql);
                             <div class="row mt-3">
                                 <div class="col-sm-6">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="ag_cel1" id="ag_cel1" placeholder="Contact 1" autocomplete="off" required>
+                                        <input type="text" class="form-control" name="ag_cel1" id="cont_phone" placeholder="Contact 1"" autocomplete=" off" required>
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <span class="fas fa-phone"></span>
@@ -169,7 +169,7 @@ $conts = mysqli_query($link, $sql);
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="ag_cel2" id="ag_cel2" placeholder="Contact 2" autocomplete="off">
+                                        <input type="text" class="form-control" name="ag_cel2" id="cont_phone2" placeholder="Contact 2" autocomplete="off" required>
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <span class="fas fa-phone"></span>
@@ -182,7 +182,7 @@ $conts = mysqli_query($link, $sql);
                             <div class="row mt-3">
                                 <div class="col-sm-6">
                                     <div class="input-group mb-3">
-                                        <input type="email" class="form-control" name="ag_mail" id="ag_mail" placeholder="Email" autocomplete="off" required>
+                                        <input type="email" class="form-control" name="ag_mail" id="cont_mail" placeholder="Email" autocomplete="off" required>
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <span class="fas fa-envelope"></span>
@@ -192,7 +192,7 @@ $conts = mysqli_query($link, $sql);
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="ag_addr" id="ag_addr" placeholder="Adresse" autocomplete="off" required>
+                                        <input type="text" class="form-control" name="ag_addr" id="cont_addr" placeholder="Adresse" autocomplete="off" required>
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <span class="fas fa-map-marker-alt"></span>
@@ -229,7 +229,7 @@ $conts = mysqli_query($link, $sql);
                             <div class="row mt-3">
                                 <div class="col-sm-6">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="ag_login" id="ag_login" placeholder="Login" autocomplete="off" required>
+                                        <input type="email" class="form-control" name="ag_login" id="ag_login" placeholder="Login" autocomplete="off" required>
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <span class="fas fa-user"></span>
@@ -239,7 +239,7 @@ $conts = mysqli_query($link, $sql);
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="input-group mb-3">
-                                        <input type="password" class="form-control" name="ag_mdp" id="ag_mdp" placeholder="Mot de passe" autocomplete="off" required>
+                                        <input type="text" class="form-control" name="ag_mdp" id="ag_mdp" placeholder="Mot de passe" autocomplete="off" required>
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <span class="fas fa-lock"></span>
@@ -309,7 +309,7 @@ $conts = mysqli_query($link, $sql);
                                     <!-- textarea -->
                                     <div class="form-group">
                                         <label>Contact 2: </label>
-                                        <input type="text" class="form-control" name="view_ag_cel2" id="view_ag_cel2" disabled>
+                                        <input type="text" class="form-control" name="ag_cel2" id="ag_cel2" disabled>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -373,7 +373,7 @@ $conts = mysqli_query($link, $sql);
                         </form>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                     </div>
                 </div>
@@ -384,7 +384,7 @@ $conts = mysqli_query($link, $sql);
         <!-- /. update modal -->
         <!-- update modal -->
         <div class="modal fade" id="update-lg">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-default">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Mettre à jour les informations</h4>
@@ -399,103 +399,52 @@ $conts = mysqli_query($link, $sql);
                             <div id="errorupmessage"></div>
                             <input type="hidden" name="update_id" id="update_id">
 
-                            <div class="row mt-3">
-                                <div class="col-sm-4">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="edit_ag_nom" id="edit_ag_nom" placeholder="Nom" autocomplete="off" required>
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-user"></span>
-                                            </div>
-                                        </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="edit_cont_name" id="edit_cont_name" placeholder="Nom & Prénoms" autocomplete="off" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
                                     </div>
                                 </div>
-                                <div class="col-sm-8">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="edit_ag_prenoms" id="edit_ag_prenoms" placeholder="Prénoms" autocomplete="off" required>
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-user"></span>
-                                            </div>
-                                        </div>
-                                    </div>                                 
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="edit_cont_phone" id="edit_cont_phone" placeholder="Contact 1" autocomplete="off" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-phone"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="edit_cont_phone2" id="edit_cont_phone2" placeholder="Contact 2" autocomplete="off" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-phone"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="email" class="form-control" name="edit_cont_mail" id="edit_cont_mail" placeholder="Email" autocomplete="off" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="edit_cont_addr" id="edit_cont_addr" placeholder="Adresse" autocomplete="off" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-map-marker-alt"></span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="row mt-3">
-                                <div class="col-sm-6">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="edit_ag_cel1" id="edit_ag_cel1" placeholder="Contact 1" autocomplete="off" required>
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-phone"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="edit_ag_cel2" id="edit_ag_cel2" placeholder="Contact 2" autocomplete="off">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-phone"></span>
-                                            </div>
-                                        </div>
-                                    </div>                            
-                                </div>
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col-sm-6">
-                                    <div class="input-group mb-3">
-                                        <input type="email" class="form-control" name="edit_ag_mail" id="edit_ag_mail" placeholder="Email" autocomplete="off" required>
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-envelope"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="edit_ag_addr" id="edit_ag_addr" placeholder="Adresse" autocomplete="off" required>
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-map-marker-alt"></span>
-                                            </div>
-                                        </div>
-                                    </div>                                
-                                </div>
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col-sm-6">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="edit_ag_service" id="edit_ag_service" placeholder="Service" autocomplete="off" required>
-                                        <!-- <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-envelope"></span>
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="edit_ag_poste" id="edit_ag_poste" placeholder="Poste" autocomplete="off" required>
-                                        <!-- <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-map-marker-alt"></span>
-                                            </div>
-                                        </div> -->
-                                    </div>                                
-                                </div>
-                            </div>                            
-                           
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <input type="hidden" name="employee_id" id="employee_id">
-                            <button type="submit" class="btn btn-primary" name="update_cont" id="update_cont">Modifier</button>
+                            <button type="submit" class="btn btn-primary" name="update_cont" id="update_cont">Save changes</button>
                         </div>
                     </form>
                 </div>
